@@ -13,8 +13,8 @@ byte mac[] = {  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 
 char muster[][] ={ 
                   {'M','i','t','t','a','g'},
-                  {},
-                  {}
+                  {'R','i','s','i','k','o'},
+                  {'&','n','b','s','p',';'}
                  };
 
 char temp_zahl[3];
