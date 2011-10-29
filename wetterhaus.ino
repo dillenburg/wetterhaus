@@ -11,7 +11,7 @@
 byte mac[] = {  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 
 
-char muster[][] ={ 
+char muster[4][6] ={ 
                   {'M','i','t','t','a','g'},
                   {'R','i','s','i','k','o'},
                   {'&','n','b','s','p',';'}
@@ -46,10 +46,10 @@ void suche_muster()
         {nr_zeichen++;}
       else // Muster gefunden
         {
-          if (debug_on) {Serial.print("Muster gefunden ");Serial.print(nr_muster)}
+          if (debug_on) {Serial.print("Muster gefunden ");Serial.print(nr_muster);}
           ausgabe++;
           nr_zeichen =0;
-          nr_muster++
+          nr_muster++;
                   
         }
     
@@ -61,6 +61,48 @@ void suche_muster()
     if (ausgabe == 2) 
     {
       if (debug_on) Serial.print(c);
+      switch (c) {
+        case '1':
+          temp_zahl[zaehler] = c;
+          zaehler++;
+        break;
+        case '2':
+          temp_zahl[zaehler] = c;
+          zaehler++;
+        break;
+        case '3':
+          temp_zahl[zaehler] = c;
+          zaehler++;
+        break;
+        case '4':
+          temp_zahl[zaehler] = c;
+          zaehler++;
+        break;
+        case '5':
+          temp_zahl[zaehler] = c;
+          zaehler++;
+        break;
+        case '6':
+          temp_zahl[zaehler] = c;
+          zaehler++;
+        break;
+        case '7':
+          temp_zahl[zaehler] = c;
+          zaehler++;
+        break;
+        case '8':
+          temp_zahl[zaehler] = c;
+          zaehler++;
+        break;
+        case '9':
+          temp_zahl[zaehler] = c;
+          zaehler++;
+        break;
+        case '0':
+          temp_zahl[zaehler] = c;
+          zaehler++;
+        break;
+      }
       
     }
   }
@@ -100,8 +142,16 @@ void loop()
 {
   // if there are incoming bytes available 
   // from the server, read them and print them:
-  if (client.available()) { suchemuster() }
-  
+  if (client.available() && ausgabe < 7) { suche_muster(); }
+  if (ausgabe==3)
+  {
+    Serial.println('Regenwahrscheinlichkeit');
+    for (int i =0; i<4; i++)
+    {
+      Serial.print(temp_zahl[i]);
+    }
+    ausgabe = 9;
+  }
   // if the server's disconnected, stop the client:
   if (!client.connected()) {
     Serial.println();
