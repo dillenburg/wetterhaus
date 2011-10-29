@@ -5,6 +5,7 @@
 //Libaries
 #include <SPI.h>
 #include <Ethernet.h>
+#include <Servo.h>
 
 // Enter a MAC address for your controller below.
 // Newer Ethernet shields have a MAC address printed on a sticker on the shield
@@ -28,12 +29,13 @@ int zaehler    = 0;
 
 boolean muster_ende = false;
 
-boolean debug_on = true;
+boolean debug_on = false;
 
 IPAddress server(217,118,169,182); //wetter.com 
 
 // Initialize the Ethernet client library
 EthernetClient client;
+Servo myservo;
 
 // ---------------------- Hilfsprogramme ----------------
 void suche_muster()
@@ -112,6 +114,7 @@ void suche_muster()
 void setup() {
   // start the serial library:
   Serial.begin(57600);
+  myservo.attach(9);
   // start the Ethernet connection:
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to configure Ethernet using DHCP");
@@ -145,12 +148,10 @@ void loop()
   if (client.available() && ausgabe < 7) { suche_muster(); }
   if (ausgabe==3)
   {
-    Serial.println('Regenwahrscheinlichkeit');
-    for (int i =0; i<4; i++)
-    {
-      Serial.print(temp_zahl[i]);
-    }
+    
     ausgabe = 9;
+    int regen = atoi(temp_zahl);
+    myservo.write(map(regen,0,100,150,30));
   }
   // if the server's disconnected, stop the client:
   if (!client.connected()) {
