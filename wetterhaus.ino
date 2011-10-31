@@ -90,6 +90,7 @@ void suche_muster()
       if (ausgabe == 2) 
       {
         if (debug_on) Serial.print(c);
+        // Übernehme Zahlen in Variable                  
         switch (c) {
           case '1':
             temp_zahl[zaehler] = c;
